@@ -3,7 +3,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     agent {
-        label 'dev', 'master'
+        label 'master'
     }
     stages {
         stage ('Prepare') {
