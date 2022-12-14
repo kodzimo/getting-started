@@ -3,7 +3,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     agent {
-        label 'ubuntu-1804 && amd64 && docker'
+        label 'dev', 'master'
     }
     stages {
         stage ('Prepare') {
