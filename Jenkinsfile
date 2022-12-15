@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     
-                    sh "docker build -t docker/getting-started:${env.BUILD_NUMBER} ."
+                    sh "docker build -t ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER} ."
                     
                     withCredentials([usernamePassword(credentialsId: 'githubPAT', passwordVariable: 'pass', usernameVariable: 'usr')]) {
                         sh """
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     
-                    sh "docker build -t docker/getting-started-dev:${env.BUILD_NUMBER} ."
+                    sh "docker build -t docker/getting-started-dev:${env.BUILD_NUMBER}-dev ."
                     
                     withCredentials([usernamePassword(credentialsId: 'githubPAT', passwordVariable: 'pass', usernameVariable: 'usr')]) {
                         sh """
