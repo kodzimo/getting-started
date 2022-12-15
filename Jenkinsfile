@@ -27,7 +27,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'githubPAT', passwordVariable: 'pass', usernameVariable: 'usr')]) {
                         sh """
                         echo ${pass} | docker login ${dockerRegistry} -u ${usr} --password-stdin
-                        docker push docker/getting-started:${env.BUILD_NUMBER}
+                        docker push ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
                         """
                         
                         // docker push ${dockerRegistry}/${dockerOwner}/${app}:${env.BUILD_NUMBER}
