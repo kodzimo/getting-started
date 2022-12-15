@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage('build and push') {
+        stage('build and push in master') {
             when {
                 branch 'master'
             }
@@ -34,6 +34,8 @@ pipeline {
                     }                    
                 }
             }
+        }
+        stage('build and push in dev') {
             when {
                 branch 'dev'
             }
@@ -45,7 +47,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'githubPAT', passwordVariable: 'pass', usernameVariable: 'usr')]) {
                         sh """
                         echo ${pass} | docker login ${dockerRegistry} -u ${usr} --password-stdin
-                        docker push ${dockerRegistry}/${dockerOwner}/getting-started-dev:${env.BUILD_NUMBER}
+                        docker push ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}-dev
                         """
                         
                         // docker push ${dockerRegistry}/${dockerOwner}/${app}:${env.BUILD_NUMBER}
