@@ -64,7 +64,7 @@ pipeline {
 
                     sh """docker pull ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
 
-                    docker run -d -p 8080:80 ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}"""
+                    docker run -d -p 80:80 ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}"""
                 }
             }
         }
