@@ -65,7 +65,6 @@ pipeline {
                     sh """docker pull ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
 
                     docker run --rm ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}"""
-                    }
                 }
             }
         }
