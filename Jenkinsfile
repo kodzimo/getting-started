@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage('build and push in master') {
+        stage('build from master and push') {
             when {
                 branch 'master'
             }
@@ -35,7 +35,7 @@ pipeline {
                 }
             }
         }
-        stage('build and push in dev') {
+        stage('build from dev and push') {
             when {
                 branch 'dev'
             }
@@ -52,6 +52,20 @@ pipeline {
                         
                         // docker push ${dockerRegistry}/${dockerOwner}/${app}:${env.BUILD_NUMBER}
                     }                    
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                branch 'master'
+            }            
+            steps {
+                script {
+
+                    sh """docker pull ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
+
+                    docker run --rm ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}"""
+                    }
                 }
             }
         }
