@@ -46,8 +46,8 @@ pipeline {
             steps {
                 script {
                     
-                    sh "docker build -t docker/getting-started-dev:${env.BUILD_NUMBER} ."
-                    sh "docker build -t ${dockerRegistry}/${dockerOwner}/notes-dev:${env.BUILD_NUMBER} ./app"
+                    sh "docker build -t docker/getting-started:dev-${env.BUILD_NUMBER} ."
+                    sh "docker build -t ${dockerRegistry}/${dockerOwner}/notes:dev-${env.BUILD_NUMBER} ./app"
                     
                     withCredentials([usernamePassword(credentialsId: 'githubPAT', passwordVariable: 'pass', usernameVariable: 'usr')]) {
                         sh """
