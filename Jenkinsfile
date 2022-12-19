@@ -72,7 +72,7 @@ pipeline {
 
                     sh """docker pull ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
                     docker pull ${dockerRegistry}/${dockerOwner}/notes:${env.BUILD_NUMBER}
-                    docker run --name gs-${env.BUILD_NUMBER} -dp 780:80 --rm --network="project ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
+                    docker run --name gs-${env.BUILD_NUMBER} -dp 780:80 --rm --network="project" ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
                     docker run --name notes-${env.BUILD_NUMBER} -dp 3000:3000 -v notes:/app --network="project" ${dockerRegistry}/${dockerOwner}/notes:${env.BUILD_NUMBER}"""
                 }
             }
