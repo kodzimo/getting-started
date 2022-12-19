@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage('build from master and push') {
+        stage('Build from master and push') {
             when {
                 branch 'master'
             }
@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage('build from dev and push') {
+        stage('Build from dev and push') {
             when {
                 branch 'dev'
             }
@@ -72,16 +72,16 @@ pipeline {
 
                     sh """docker pull ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
                     docker pull ${dockerRegistry}/${dockerOwner}/notes:${env.BUILD_NUMBER}
-                    docker run -dp 80:80 --rm ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER}
-                    docker run -dp 3000:3000 ${dockerRegistry}/${dockerOwner}/notes:${env.BUILD_NUMBER}"""
+                    docker run -dp 780:80 --rm ${dockerRegistry}/${dockerOwner}/getting-started:${env.BUILD_NUMBER} --network=project
+                    docker run -dp 3000:3000 -v notes:/app ${dockerRegistry}/${dockerOwner}/notes:${env.BUILD_NUMBER} --network=project"""
                 }
             }
         }
     }
     post {
-        always {
-            cleanWs()
-        }
+        // always {
+        //     cleanWs()
+        // }
         success {
             echo "Job succeded"            
         }
